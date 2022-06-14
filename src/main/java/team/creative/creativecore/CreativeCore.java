@@ -58,9 +58,9 @@ public class CreativeCore implements ModInitializer {
     public static final CreativeCoreConfig CONFIG = new CreativeCoreConfig();
     public static final ResourceLocation FAKE_WORLD_LOCATION = new ResourceLocation(MODID, "fake");
     public static ResourceKey<Level> FAKE_DIMENSION_NAME = ResourceKey.create(Registry.DIMENSION_REGISTRY, FAKE_WORLD_LOCATION);
+    
     public static final GuiCreatorBasic CONFIG_OPEN = GuiCreator
             .register("config", new GuiCreatorBasic((player, nbt) -> new ConfigGuiLayer(CreativeConfigRegistry.ROOT, Side.SERVER)));
-    
     public static final GuiCreatorBasic CONFIG_CLIENT_OPEN = GuiCreator
             .register("clientconfig", new GuiCreatorBasic((player, nbt) -> new ConfigGuiLayer(CreativeConfigRegistry.ROOT, Side.CLIENT)));
     public static final GuiCreatorBasic CONFIG_CLIENT_SYNC_OPEN = GuiCreator

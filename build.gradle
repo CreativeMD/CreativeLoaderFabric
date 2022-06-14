@@ -79,7 +79,7 @@ jar {
 }
 
 loom.mixin {
-    defaultRefmapName = "creativecore.mixin-refmap.json"
+    defaultRefmapName = "creativecore.mixins.refmap.json"
 }
 
 // configure the maven publication
