@@ -29,7 +29,7 @@ loom.runConfigs.configureEach {
 
 dependencies {
     // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    minecraft "com.mojang:minecraft:${project(':CreativeCore').minecraft_version}"
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "maven.modrinth:modmenu:4.0.0"
@@ -69,7 +69,7 @@ java {
 }
 
 remapJar {
-	archiveFileName = project.modname + "_FABRIC_v" + project(':CreativeCore').version + "_mc" + project.minecraft_version + ".jar"
+	archiveFileName = project.modname + "_FABRIC_v" + project(':CreativeCore').version + "_mc" + project(':CreativeCore').minecraft_version + ".jar"
 }
 
 jar {
