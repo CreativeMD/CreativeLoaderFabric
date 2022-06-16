@@ -44,46 +44,24 @@ import team.creative.creativecore.common.util.mc.JsonUtils;
 
 public class ConfigEventHandler {
     
+    @Environment(EnvType.CLIENT)
+    private void client() {
+        ClientLifecycleEvents.CLIENT_STARTED.register(x -> load(Side.CLIENT));
+    }
+    
     private final DecimalFormat df = generateFormat();
     private final File CONFIG_DIRECTORY;
     private final Logger LOGGER;
     private final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
-    private static class ClientHandler extends ServerHandler {
-        @Environment(EnvType.CLIENT)
-        @Override
-        public void register(ConfigEventHandler handler) {
-            ClientLifecycleEvents.CLIENT_STARTED.register(new Handler(handler));
-        }
-        
-        @Environment(EnvType.CLIENT)
-        private static class Handler implements ClientLifecycleEvents.ClientStarted {
-            private final ConfigEventHandler configEventHandler;
-            
-            Handler(ConfigEventHandler configEventHandler) {
-                this.configEventHandler = configEventHandler;
-            }
-            
-            @Override
-            public void onClientStarted(Minecraft client) {
-                configEventHandler.load(Side.CLIENT);
-            }
-        }
-    }
-    
-    private static class ServerHandler {
-        public static ServerHandler INSTANCE = new ClientHandler();
-        
-        public void register(ConfigEventHandler handler) {
-            ServerLifecycleEvents.SERVER_STARTING.register(server -> handler.load(Side.SERVER));
-        }
-    }
-    
     public ConfigEventHandler(File CONFIG_DIRECTORY, Logger LOGGER) {
         this.CONFIG_DIRECTORY = CONFIG_DIRECTORY;
         this.LOGGER = LOGGER;
         ServerPlayConnectionEvents.JOIN.register(this::playerLoggedIn);
-        ServerHandler.INSTANCE.register(this);
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> load(Side.SERVER));
+        
+        if (CreativeCore.loader().getOverallSide().isClient())
+            client();
     }
     
     public static List<String> loadClientFieldList(ICreativeConfigHolder holder) {
