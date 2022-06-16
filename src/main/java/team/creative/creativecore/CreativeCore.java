@@ -45,6 +45,8 @@ import team.creative.creativecore.common.gui.packet.ControlSyncPacket;
 import team.creative.creativecore.common.gui.packet.LayerClosePacket;
 import team.creative.creativecore.common.gui.packet.LayerOpenPacket;
 import team.creative.creativecore.common.gui.packet.OpenGuiPacket;
+import team.creative.creativecore.common.loader.FabricLoaderUtils;
+import team.creative.creativecore.common.loader.ILoaderUtils;
 import team.creative.creativecore.common.network.CreativeNetwork;
 import team.creative.creativecore.common.util.argument.StringArrayArgumentType;
 import team.creative.creativecore.mixin.ArgumentTypeInfosAccessor;
@@ -52,6 +54,7 @@ import team.creative.creativecore.mixin.ArgumentTypeInfosAccessor;
 public class CreativeCore implements ModInitializer {
     
     private static final ICreativeLoader LOADER = new CreativeFabricLoader();
+    private static final ILoaderUtils UTILS = new FabricLoaderUtils();
     public static final String MODID = "creativecore";
     public static final Logger LOGGER = LogManager.getLogger(CreativeCore.MODID);
     public static final CreativeNetwork NETWORK = new CreativeNetwork("1.0", LOGGER, new ResourceLocation(CreativeCore.MODID, "main"));
@@ -110,5 +113,9 @@ public class CreativeCore implements ModInitializer {
     
     public static ICreativeLoader loader() {
         return LOADER;
+    }
+    
+    public static ILoaderUtils utils() {
+        return UTILS;
     }
 }

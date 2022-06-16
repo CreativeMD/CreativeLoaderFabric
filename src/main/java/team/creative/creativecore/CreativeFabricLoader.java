@@ -8,11 +8,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -87,6 +89,11 @@ public class CreativeFabricLoader implements ICreativeLoader {
     @Override
     public void registerClientStarted(Runnable run) {
         ClientLifecycleEvents.CLIENT_STARTED.register(x -> run.run());
+    }
+    
+    @Override
+    public void registerKeybind(Supplier supplier) {
+        KeyBindingHelper.registerKeyBinding((KeyMapping) supplier.get());
     }
     
     @Override
