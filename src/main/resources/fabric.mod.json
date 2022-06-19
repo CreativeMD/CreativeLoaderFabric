@@ -21,7 +21,7 @@
     "contact": {
     },
     "license": "GNU LGPL v2.1",
-    "icon": "assets/creativecore.png",
+    "icon": "creativecore.png",
     "environment": "*",
     "entrypoints": {
         "main": [
