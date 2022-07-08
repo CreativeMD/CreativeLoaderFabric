@@ -42,10 +42,10 @@ public class CreativeCoreClient implements ClientModInitializer {
         MOD_CONFIGS.add(modid);
     }
     
-    public static float getDeltaFrameTime() {
+    public static float getFrameTime() {
         if (mc.isPaused())
             return 1.0F;
-        return mc.getDeltaFrameTime();
+        return mc.getFrameTime();
     }
     
     public static void commands(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess, Commands.CommandSelection environment) {
