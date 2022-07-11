@@ -92,8 +92,8 @@ public class CreativeFabricLoader implements ICreativeLoader {
     }
     
     @Override
-    public void registerKeybind(Supplier supplier) {
-        KeyBindingHelper.registerKeyBinding((KeyMapping) supplier.get());
+    public void registerKeybind(Supplier<KeyMapping> supplier) {
+        KeyBindingHelper.registerKeyBinding(supplier.get());
     }
     
     @Override
