@@ -60,7 +60,11 @@ public class CreativeNetwork {
             public void receive(Minecraft client, ClientPacketListener handler, FriendlyByteBuf buf, PacketSender responseSender) {
                 var message = packet_handler.read(buf);
                 client.execute(() -> {
-                    message.execute(client.player);
+                    try {
+                        message.execute(client.player);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 });
             }
         }
