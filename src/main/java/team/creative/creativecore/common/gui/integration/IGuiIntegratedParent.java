@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import team.creative.creativecore.client.render.GuiRenderHelper;
 import team.creative.creativecore.common.gui.GuiControl;
@@ -48,7 +49,7 @@ public interface IGuiIntegratedParent extends IGuiParent {
         for (int i = 0; i < layers.size(); i++) {
             GuiLayer layer = layers.get(i);
             
-            if (i == layers.size() - 1 && layer.hasGrayBackground()) 
+            if (i == layers.size() - 1 && layer.hasGrayBackground())
                 GuiRenderHelper.verticalGradientRect(matrixStack, 0, 0, width, height, -1072689136, -804253680);
             
             matrixStack.pushPose();
@@ -107,7 +108,7 @@ public interface IGuiIntegratedParent extends IGuiParent {
     }
     
     @Override
-    public default Rect toScreenRect(GuiControl control, Rect rect) {
+    default Rect toScreenRect(GuiControl control, Rect rect) {
         if (control instanceof GuiLayer layer) {
             int offX = (Minecraft.getInstance().getWindow().getGuiScaledWidth() - layer.getWidth()) / 2;
             int offY = (Minecraft.getInstance().getWindow().getGuiScaledHeight() - layer.getHeight()) / 2;
