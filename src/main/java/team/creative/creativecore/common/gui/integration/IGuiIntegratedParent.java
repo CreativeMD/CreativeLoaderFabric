@@ -105,4 +105,14 @@ public interface IGuiIntegratedParent extends IGuiParent {
                     return layer.get(control.substring(layer.getNestedName().length() + 1));
         return null;
     }
+    
+    @Override
+    public default Rect toScreenRect(GuiControl control, Rect rect) {
+        if (control instanceof GuiLayer layer) {
+            int offX = (Minecraft.getInstance().getWindow().getGuiScaledWidth() - layer.getWidth()) / 2;
+            int offY = (Minecraft.getInstance().getWindow().getGuiScaledHeight() - layer.getHeight()) / 2;
+            rect.move(offX, offY);
+        }
+        return rect;
+    }
 }
