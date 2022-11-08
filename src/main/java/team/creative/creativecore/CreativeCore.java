@@ -1,7 +1,5 @@
 package team.creative.creativecore;
 
-import java.util.OptionalLong;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,19 +12,11 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
-import net.minecraft.world.level.dimension.DimensionType;
 import team.creative.creativecore.common.config.event.ConfigEventHandler;
 import team.creative.creativecore.common.config.gui.ClientSyncGuiLayer;
 import team.creative.creativecore.common.config.gui.ConfigGuiLayer;
@@ -59,8 +49,6 @@ public class CreativeCore implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(CreativeCore.MODID);
     public static final CreativeNetwork NETWORK = new CreativeNetwork("1.0", LOGGER, new ResourceLocation(CreativeCore.MODID, "main"));
     public static final CreativeCoreConfig CONFIG = new CreativeCoreConfig();
-    public static final ResourceLocation FAKE_WORLD_LOCATION = new ResourceLocation(MODID, "fake");
-    public static ResourceKey<Level> FAKE_DIMENSION_NAME = ResourceKey.create(Registry.DIMENSION_REGISTRY, FAKE_WORLD_LOCATION);
     
     public static final GuiCreatorBasic CONFIG_OPEN = GuiCreator
             .register("config", new GuiCreatorBasic((player, nbt) -> new ConfigGuiLayer(CreativeConfigRegistry.ROOT, Side.SERVER)));
@@ -69,7 +57,6 @@ public class CreativeCore implements ModInitializer {
     public static final GuiCreatorBasic CONFIG_CLIENT_SYNC_OPEN = GuiCreator
             .register("clientsyncconfig", new GuiCreatorBasic((player, nbt) -> new ClientSyncGuiLayer(CreativeConfigRegistry.ROOT)));
     public static ConfigEventHandler CONFIG_HANDLER;
-    public static Holder<DimensionType> FAKE_DIMENSION;
     public static MenuType<ContainerIntegration> GUI_CONTAINER;
     
     public CreativeCore() {
@@ -100,9 +87,6 @@ public class CreativeCore implements ModInitializer {
         NETWORK.registerType(OpenGuiPacket.class, OpenGuiPacket::new);
         NETWORK.registerType(ControlSyncPacket.class, ControlSyncPacket::new);
         CONFIG_HANDLER = new ConfigEventHandler(FabricLoader.getInstance().getConfigDir().toFile(), LOGGER);
-        FAKE_DIMENSION = Holder.direct(new DimensionType(OptionalLong
-                .empty(), true, false, false, false, 1, false, false, -64, 384, 384, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, UniformInt
-                        .of(0, 0), 0)));
         
         ArgumentTypeInfosAccessor.getByClass().put(StringArrayArgumentType.class, SingletonArgumentInfo.contextFree(() -> StringArrayArgumentType.stringArray()));
         
