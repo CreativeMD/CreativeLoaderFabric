@@ -116,4 +116,9 @@ public interface IGuiIntegratedParent extends IGuiParent {
         }
         return rect;
     }
+    
+    @Override
+    default Rect toLayerRect(GuiControl control, Rect rect) {
+        return rect;
+    }
 }
