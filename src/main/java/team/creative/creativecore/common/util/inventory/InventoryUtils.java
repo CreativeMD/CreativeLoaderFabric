@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -152,7 +152,7 @@ public class InventoryUtils {
                 
                 @Override
                 public int compare(ItemStack arg0, ItemStack arg1) {
-                    return Registry.ITEM.getKey(arg0.getItem()).toString().compareToIgnoreCase(Registry.ITEM.getKey(arg1.getItem()).toString());
+                    return BuiltInRegistries.ITEM.getKey(arg0.getItem()).toString().compareToIgnoreCase(BuiltInRegistries.ITEM.getKey(arg1.getItem()).toString());
                 }
                 
             });
@@ -173,7 +173,7 @@ public class InventoryUtils {
                     if (arg0.getDamageValue() > arg1.getDamageValue())
                         return 1;
                     
-                    return Registry.ITEM.getKey(arg0.getItem()).toString().compareToIgnoreCase(Registry.ITEM.getKey(arg1.getItem()).toString());
+                    return BuiltInRegistries.ITEM.getKey(arg0.getItem()).toString().compareToIgnoreCase(BuiltInRegistries.ITEM.getKey(arg1.getItem()).toString());
                 }
                 
             });
