@@ -31,6 +31,7 @@ import team.creative.creativecore.common.gui.packet.ControlSyncPacket;
 import team.creative.creativecore.common.gui.packet.ImmediateItemStackPacket;
 import team.creative.creativecore.common.gui.packet.LayerClosePacket;
 import team.creative.creativecore.common.gui.packet.OpenGuiPacket;
+import team.creative.creativecore.common.gui.packet.SyncPacket;
 import team.creative.creativecore.common.loader.FabricLoaderUtils;
 import team.creative.creativecore.common.loader.ILoaderUtils;
 import team.creative.creativecore.common.network.CreativeNetwork;
@@ -81,6 +82,7 @@ public class CreativeCore implements ModInitializer {
         NETWORK.registerType(LayerClosePacket.class, LayerClosePacket::new);
         NETWORK.registerType(OpenGuiPacket.class, OpenGuiPacket::new);
         NETWORK.registerType(ControlSyncPacket.class, ControlSyncPacket::new);
+        NETWORK.registerType(SyncPacket.class, SyncPacket::new);
         NETWORK.registerType(ImmediateItemStackPacket.class, ImmediateItemStackPacket::new);
         
         CONFIG_HANDLER = new ConfigEventHandler(FabricLoader.getInstance().getConfigDir().toFile(), LOGGER);
