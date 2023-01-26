@@ -16,6 +16,7 @@ import team.creative.creativecore.common.gui.GuiLayer;
 import team.creative.creativecore.common.gui.IGuiParent;
 import team.creative.creativecore.common.gui.event.GuiEvent;
 import team.creative.creativecore.common.gui.event.GuiTooltipEvent;
+import team.creative.creativecore.common.network.CreativePacket;
 import team.creative.creativecore.common.util.math.geo.Rect;
 
 public interface IGuiIntegratedParent extends IGuiParent {
@@ -126,4 +127,7 @@ public interface IGuiIntegratedParent extends IGuiParent {
     public default IGuiIntegratedParent getIntegratedParent() {
         return this;
     }
+    
+    public void send(CreativePacket message);
+    
 }
