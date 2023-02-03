@@ -50,8 +50,10 @@ public interface IGuiIntegratedParent extends IGuiParent {
         for (int i = 0; i < layers.size(); i++) {
             GuiLayer layer = layers.get(i);
             
-            if (i == layers.size() - 1 && layer.hasGrayBackground())
+            if (i == layers.size() - 1 && layer.hasGrayBackground()) {
+                RenderSystem.disableDepthTest();
                 GuiRenderHelper.verticalGradientRect(matrixStack, 0, 0, width, height, -1072689136, -804253680);
+            }
             
             matrixStack.pushPose();
             int offX = (width - layer.getWidth()) / 2;
