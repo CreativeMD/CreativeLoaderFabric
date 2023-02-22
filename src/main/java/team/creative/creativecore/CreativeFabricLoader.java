@@ -109,4 +109,9 @@ public class CreativeFabricLoader implements ICreativeLoader {
         return FabricLoader.getInstance().getEnvironmentType() == EnvType.SERVER ? Side.SERVER : Side.CLIENT;
     }
     
+    @Override
+    public Side getEffectiveSide() {
+        return Side.SERVER; // Not supported on fabric
+    }
+    
 }
